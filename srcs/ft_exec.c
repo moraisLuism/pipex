@@ -20,5 +20,5 @@ void	ft_exec(char *argv, char **envp)
 	command = ft_split(argv, ' ');
 	path = ft_path(command[0], envp);
 	if (execve(path, command, envp) == -1)
-		ft_error();
+		ft_error();	
 }

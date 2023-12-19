@@ -6,49 +6,42 @@
 #    By: lmorais- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/15 08:43:20 by lmorais-          #+#    #+#              #
-#    Updated: 2023/12/15 08:43:24 by lmorais-         ###   ########.fr        #
+#    Updated: 2023/12/18 09:13:21 by lmorais-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-LIBFT_PATH = libft/
-LIBFT_LIB = $(LIBFT_PATH)libft.a
-INCLUDE = -I./includes
-RM = rm -rf
-VPATH = srcs
-
-SRCS = 	ft_error.c\
-		ft_exec.c\
-		ft_path.c\
-		ft_process_1.c\
-		ft_process_2.c\
-		pipex.c
+CFLAGS = -Wall -Werror -Wextra -g
+INCLUDES_DIR = includes
+SRCS = 	srcs/pipex.c \
+		srcs/ft_process_1.c \
+		srcs/ft_process_2.c \
+		srcs/ft_exec.c \
+		srcs/ft_error.c \
+		srcs/ft_path.c \
+		srcs/libft/ft_split.c \
+		srcs/libft/ft_strjoin.c \
+		srcs/libft/ft_strlen.c \
+		srcs/libft/ft_strncmp.c \
+		srcs/libft/ft_strnstr.c
 		
-OBJ_DIR = obj
-OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR)  $(OBJS)
-	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) -o $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR):
-	mkdir -p obj
-
-$(OBJ_DIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+%.o: %.c $(INCLUDES_DIR)
+	$(CC) $(CFLAGS) -I./$(INCLUDES_DIR) -c $< -o $@
 
 clean:
-	$(MAKE) clean -C ./libft
-	$(RM) $(OBJ_DIR)
+	rm -rf  $(OBJ) 
 
 fclean: clean
-	$(MAKE) fclean -C ./libft
-	$(RM) $(NAME)
-	
+	rm -rf  $(NAME)
+
 re: fclean all
 
 .PHONY: all clean fclean re
