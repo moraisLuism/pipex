@@ -12,8 +12,13 @@
 
 #include "pipex.h"
 
-void	ft_error(void)
+void	ft_error(const char *error_message)
 {
+	int	err;
+
+	err = ft_strlen(error_message);
 	write(2, "ERROR\n", 6);
+	write(2, error_message, err);
+	write(2, "\n", 1);
 	exit(EXIT_FAILURE);
 }

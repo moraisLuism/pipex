@@ -22,6 +22,6 @@ void	ft_process_1(char **argv, char **envp, int *fd);
 void	ft_process_2(char **argv, char **envp, int *fd);
 void	ft_exec(char *argv, char **envp);
 char	*ft_path(char *command, char **envp);
-void	ft_error(void);
+void	ft_error(const char *error_message);
 
 #endif

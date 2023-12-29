@@ -18,7 +18,7 @@ void	ft_process_2(char **argv, char **envp, int *fd)
 
 	file2 = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	if (file2 == -1)
-		ft_error();
+		ft_error("OPEN FILE2 FAIL");
 	dup2(fd[0], STDIN_FILENO);
 	dup2(file2, STDOUT_FILENO);
 	close(fd[1]);
